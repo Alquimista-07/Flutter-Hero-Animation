@@ -44,9 +44,19 @@ class HomePage extends StatelessWidget {
             Placeholder(fallbackHeight: 150),
           ]),
           TableRow(children: [
+            // NOTA: Implementar el Hero Animation, es bien sencillo en este caso lo que quiero animar es el FlutterLogo, inclusive se podría animar el GestureDetector
+            //       pero no tiene mucho sentido. Entonces para esto vamos a envolver el FlutterLogo en un widget llamado Hero. Adicionalmente este widget sería el que
+            //       tiene en común con la pantalla Detail y por lo tanto tienen que tener el mismo tag.
+            // NOTA: Otra cosa que tenemos que tener en cuenta es que el widget Hero tiene otras propiedades que podemos cambiar como la animación, la duración entre otras
+            //       cosas.
             GestureDetector(
               onTap: () => pushRoute(context),
-              child: const FlutterLogo(size: 150),
+              child: const Hero(
+                // NOTA: OJOOOOOOO es super importante tener en cuenta que el tag tiene que ser único para cada Hero, ya que si no hacemos esto la pantalla va a aparecer en negro
+                //       o marcar algún error.
+                tag: 'logo',
+                child: FlutterLogo(size: 150),
+              ),
             ),
             const Placeholder(fallbackHeight: 150),
             const Placeholder(fallbackHeight: 150),
